@@ -2,7 +2,7 @@
                     SEMINARSKI RAD - ANALIZA VREMENSKIH PODATAKA
 ================================================================================
 
-AUTOR: [Vaše ime]
+AUTOR: Aleksandar Mijatovic
 DATUM: 7. Oktobar 2025.
 PROJEKAT: Vizualizacija i analiza globalnih temperatura
 
