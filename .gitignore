@@ -7,3 +7,6 @@
 *.svg
 *.webp
 *.ico
+
+# Large data files
+weather-project/data/weather.csv

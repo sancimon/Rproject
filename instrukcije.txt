@@ -1,0 +1,274 @@
+================================================================================
+                    UPUTSTVO ZA POKRETANJE ANALIZE PODATAKA
+================================================================================
+
+AUTOR: [Vaše ime]
+DATUM: 7. Oktobar 2025.
+
+================================================================================
+1. KAKO POKRENUTI PROGRAM I GENERISATI SLIKE
+================================================================================
+
+OPCIJA 1: Pokretanje iz terminala
+----------------------------------
+1. Otvori terminal (Ctrl + Alt + T)
+
+2. Idi u folder projekta:
+   cd /home/cutedrugs/Desktop/RProject
+
+3. Pokreni R skriptu:
+   Rscript weather_analysis_sample.R
+
+4. Sačekaj 30-60 sekundi dok se program izvršava
+
+5. Slike će biti generisane u "outputs/" folderu
+
+
+OPCIJA 2: Pokretanje iz RStudio
+--------------------------------
+1. Otvori RStudio
+
+2. Otvori fajl: weather_analysis_sample.R
+
+3. Pritisni Ctrl + Shift + Enter (Run All)
+   ili klikni na "Source" dugme
+
+4. Slike će biti generisane u "outputs/" folderu
+
+
+================================================================================
+2. GENERISANE SLIKE
+================================================================================
+
+Nakon pokretanja programa, u "outputs/" folderu će biti:
+
+1. temperature_over_time.png
+   - Temperaturne vrednosti tokom vremena
+   - Scatter plot sa trend linijom
+
+2. temperature_per_month.png
+   - Prosečne temperature po mesecima
+   - Bar chart (stubičasti grafik)
+
+3. top_cities.png
+   - 10 najtoplijih i 10 najhladnijih gradova
+   - Horizontalni bar chart
+
+4. region_comparison.png
+   - Uporedna analiza temperatura po regionima
+   - Multi-line grafik
+
+5. yearly_trends.png
+   - Temperatura kroz godine sa trend linijom
+   - Pokazuje klimatske promene
+
+
+================================================================================
+3. KAKO VIDETI GENERISANE SLIKE
+================================================================================
+
+METOD 1: File manager (grafički)
+---------------------------------
+1. Otvori file manager
+
+2. Navigiraj do:
+   /home/cutedrugs/Desktop/RProject/outputs/
+
+3. Dvoklik na bilo koju .png sliku
+
+
+METOD 2: Iz terminala
+---------------------
+# Otvori ceo folder:
+xdg-open outputs/
+
+# Ili otvori pojedinačnu sliku:
+xdg-open outputs/temperature_over_time.png
+xdg-open outputs/temperature_per_month.png
+xdg-open outputs/top_cities.png
+xdg-open outputs/region_comparison.png
+xdg-open outputs/yearly_trends.png
+
+
+METOD 3: Image viewer
+---------------------
+# Koristi bilo koji viewer:
+eog outputs/*.png
+# ili
+gwenview outputs/*.png
+# ili
+gimp outputs/temperature_over_time.png
+
+
+================================================================================
+4. AKO ŽELIŠ DA PONOVO GENERIŠEŠ SLIKE
+================================================================================
+
+Da li si promenio kod?
+-----------------------
+DA → Samo ponovo pokreni program (videti sekciju 1)
+NE → Program će automatski prepisati postojeće slike sa novim verzijama
+
+
+Da li želiš druge rezultate?
+-----------------------------
+Program koristi set.seed(123) za reproduktivnost.
+Ako želiš drugačije nasumične rezultate:
+
+1. Otvori: weather_analysis_sample.R
+
+2. Nađi liniju:
+   set.seed(123)
+
+3. Promeni broj (npr. 456, 789, bilo koji broj):
+   set.seed(456)
+
+4. Sačuvaj fajl (Ctrl + S)
+
+5. Ponovo pokreni program
+
+
+================================================================================
+5. ČESTE GREŠKE I REŠENJA
+================================================================================
+
+GREŠKA: "Error in library(dplyr) : there is no package called 'dplyr'"
+-----------------------------------------------------------------------
+REŠENJE: Instaliraj biblioteke:
+   R
+   install.packages(c("dplyr", "ggplot2", "lubridate", "readr"))
+   quit()
+
+
+GREŠKA: "Cannot open file 'Rproject/weather-project/data/weather.csv'"
+-----------------------------------------------------------------------
+REŠENJE: Proveri da li CSV fajl postoji:
+   ls -la Rproject/weather-project/data/weather.csv
+
+Ako ne postoji, proveri putanju u kodu.
+
+
+GREŠKA: "outputs/ folder not found"
+------------------------------------
+REŠENJE: Program automatski kreira folder, ali možeš i ručno:
+   mkdir -p outputs
+
+
+GREŠKA: Program traje predugo (više od 5 minuta)
+-------------------------------------------------
+REŠENJE:
+- Proveri da li koristiš weather_analysis_sample.R (brži)
+- Ne koristi weather_analysis.R (spor, za pun dataset)
+
+
+================================================================================
+6. STRUKTURA PROJEKTA
+================================================================================
+
+RProject/
+│
+├── weather_analysis.R              # Originalna skripta (ne koristi)
+├── weather_analysis_sample.R       # GLAVNI FAJL - koristi ovaj!
+├── SEMINARSKI.txt                  # Dokumentacija projekta
+├── instrukcije.txt                 # Ovaj fajl
+│
+├── Rproject/
+│   └── weather-project/
+│       └── data/
+│           └── weather.csv         # Izvorni podaci (2.9M redova)
+│
+└── outputs/                        # GENERISANE SLIKE
+    ├── temperature_over_time.png
+    ├── temperature_per_month.png
+    ├── top_cities.png
+    ├── region_comparison.png
+    └── yearly_trends.png
+
+
+================================================================================
+7. BRZA REFERENCA - KOMANDE
+================================================================================
+
+# Pokreni program:
+Rscript weather_analysis_sample.R
+
+# Vidi slike:
+xdg-open outputs/
+
+# Listaj sve output fajlove:
+ls -lh outputs/
+
+# Obriši stare slike (ako želiš):
+rm outputs/*.png
+
+# Proveri R verziju:
+R --version
+
+# Proveri instalirane pakete:
+Rscript -e "installed.packages()[,c('Package','Version')]"
+
+
+================================================================================
+8. NAPREDNE OPCIJE
+================================================================================
+
+Promena veličine uzorka
+-----------------------
+Otvori weather_analysis_sample.R i nađi liniju:
+   weather_sample <- weather_data %>% sample_frac(0.1)
+
+Promeni 0.1 (10%) u:
+- 0.05 = 5% (brže, manje precizno)
+- 0.20 = 20% (sporije, preciznije)
+- 1.00 = 100% (pun dataset, jako sporo!)
+
+
+Promena rezolucije slika
+-------------------------
+Nađi svaki ggsave() poziv i promeni dpi:
+   dpi = 300  # Visoka rezolucija (default)
+   dpi = 150  # Srednja (manji fajl)
+   dpi = 600  # Ultra visoka (za printing)
+
+
+Promena veličine slika
+-----------------------
+U ggsave() promeni width i height:
+   width = 10,  # Širina u inčima
+   height = 6   # Visina u inčima
+
+
+================================================================================
+9. DODATNE INFORMACIJE
+================================================================================
+
+Vreme izvršavanja: ~30 sekundi
+Memorija: ~500MB RAM
+Output veličina: ~1.1MB (svih 5 slika)
+
+Podržane platforme:
+- Linux (Ubuntu, Debian, Fedora, itd.)
+- macOS
+- Windows (koristi Rscript.exe)
+
+R verzija: 4.0 ili novija preporučena
+
+================================================================================
+10. KONTAKT I PODRŠKA
+================================================================================
+
+Za dodatna pitanja ili probleme:
+- Konsultuj SEMINARSKI.txt za detaljnu dokumentaciju
+- Proveri R dokumentaciju: https://www.r-project.org/
+- Stack Overflow: https://stackoverflow.com/questions/tagged/r
+
+================================================================================
+KRAJ UPUTSTVA
+================================================================================
+
+BRZI START:
+1. cd /home/cutedrugs/Desktop/RProject
+2. Rscript weather_analysis_sample.R
+3. xdg-open outputs/
+
+Srećno! 🌡️📊
