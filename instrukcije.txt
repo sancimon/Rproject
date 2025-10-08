@@ -2,7 +2,7 @@
                     UPUTSTVO ZA POKRETANJE ANALIZE PODATAKA
 ================================================================================
 
-AUTOR: [Vaše ime]
+AUTOR: Aleksandar Mijatovic
 DATUM: 7. Oktobar 2025.
 
 ================================================================================
